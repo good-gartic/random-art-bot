@@ -24,6 +24,7 @@ spring:
     password: ${DATABASE_PASSWORD}
 
 # Configuration for the production server (Good Gartic)
+# TODO: Make this environmental-variables dependent so it can be changed on heroku without changing the code
 discord:
   guild-id: 683633975838769192
   art-channel-id: 683638355895779450 #gartic-art
