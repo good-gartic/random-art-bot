@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.crypto.password.NoOpPasswordEncoder
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +25,9 @@ class SecurityConfiguration(@Value("\${administration.password}") private val pa
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
+        // TODO: Maybe use password hash here some day
         auth.inMemoryAuthentication()
+            .passwordEncoder(NoOpPasswordEncoder.getInstance())
             .withUser("Tim")
             .password(password)
             .roles("USER")

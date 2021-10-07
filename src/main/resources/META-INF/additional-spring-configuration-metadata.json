@@ -29,6 +29,11 @@
       "name": "discord.developer-id",
       "type": "java.lang.String",
       "description": "Id of the bot developer so that the bot can ping me if shit gets wrong."
+    },
+    {
+      "name": "administration.password",
+      "type": "java.lang.String",
+      "description": "Password for the main admin account."
     }
   ]
 }
