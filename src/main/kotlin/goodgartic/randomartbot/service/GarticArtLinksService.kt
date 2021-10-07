@@ -69,6 +69,7 @@ class GarticArtLinksService(
         // TODO: Maybe add other interesting information?
         message?.let {
             builder
+                .setDescription(message.contentRaw)
                 .setAuthor(message.author.name, null, message.author.avatarUrl)
                 .setFooter("Posted at ${message.timeCreated}")
         }
