@@ -12,11 +12,11 @@ data class GarticArtLink(
     @Id
     val id: UUID = UUID.randomUUID(),
 
-    @Column(name = "message_id", unique = true, nullable = false)
-    val messageId: Long,
-
     @Column(name = "image_url", unique = true, nullable = false)
-    val imageUrl: String,
+    val image: String,
+
+    @Column(name = "message_id", unique = true, nullable = false)
+    val messageId: Long? = null,
 
     @Column(name = "is_approved", nullable = false)
     var approved: Boolean = false
