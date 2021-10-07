@@ -4,6 +4,11 @@ spring:
     username: art
     password: art
 
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
 # Configuration for the development server (Nerd Cave)
 discord:
   token: ${DISCORD_TOKEN}
@@ -23,6 +28,9 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
+  jpa:
+    show-sql: false
+
 # Configuration for the production server (Good Gartic)
 # TODO: Make this environmental-variables dependent so it can be changed on heroku without changing the code
 discord:
@@ -30,3 +38,4 @@ discord:
   art-channel-id: 683638355895779450 #gartic-art
   repost-channel-id: 683633975842963456 #chat
   repost-interval: 24 * 60 * 60 # 24 hours for now
+
