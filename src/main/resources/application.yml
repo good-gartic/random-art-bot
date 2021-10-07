@@ -12,7 +12,7 @@ spring:
 # Configuration for the development server (Nerd Cave)
 discord:
   token: ${DISCORD_TOKEN}
-  guild-id: 683633975838769192
+  guild-id: 691227762102501436
   art-channel-id: 895736096548323328 # The channel from which the images are pulled from by the server owner
   repost-channel-id: 895736123878424646 # The channel to which the pictures are posted periodically
   repost-interval: 120 # Number of seconds between each picture reposted
