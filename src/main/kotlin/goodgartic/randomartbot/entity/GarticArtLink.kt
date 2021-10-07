@@ -8,7 +8,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "links")
-data class Link(
+data class GarticArtLink(
     @Id
     val id: UUID = UUID.randomUUID(),
 
