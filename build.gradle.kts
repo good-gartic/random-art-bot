@@ -20,6 +20,10 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {
+        name = "m2-dv8tion"
+        url = uri("https://m2.dv8tion.net/releases")
+    }
 }
 
 dependencies {
@@ -27,6 +31,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("net.dv8tion:JDA:4.3.0_333")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
