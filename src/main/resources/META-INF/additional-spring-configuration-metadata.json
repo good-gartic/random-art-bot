@@ -4,6 +4,31 @@
       "name": "discord.token",
       "type": "java.lang.String",
       "description": "Discord token used for the gateway authentication."
+    },
+    {
+      "name": "discord.guild-id",
+      "type": "java.lang.Long",
+      "description": "ID of the guild that is managed by the bot."
+    },
+    {
+      "name": "discord.art-channel-id",
+      "type": "java.lang.Long",
+      "description": "Id of the channel from which the images are pulled by the owner."
+    },
+    {
+      "name": "discord.repost-channel-id",
+      "type": "java.lang.Long",
+      "description": "Id of the channel to which the images are reposted periodically."
+    },
+    {
+      "name": "discord.repost-interval",
+      "type": "java.lang.Long",
+      "description": "Number of seconds between reposting images."
+    },
+    {
+      "name": "discord.developer-id",
+      "type": "java.lang.String",
+      "description": "Id of the bot developer so that the bot can ping me if shit gets wrong."
     }
   ]
 }

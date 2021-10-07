@@ -4,15 +4,28 @@ spring:
     username: art
     password: art
 
+# Configuration for the development server (Nerd Cave)
 discord:
   token: ${DISCORD_TOKEN}
+  guild-id: 683633975838769192
+  art-channel-id: 0 # The channel from which the images are pulled from by the server owner
+  repost-channel-id: 0 # The channel to which the pictures are posted periodically
+  repost-interval: 0 # Number of seconds between each picture reposted
+  developer-id: 238728915647070209 # So that the bot can ping me if shit gets wrong
 ---
 spring:
-  profiles:
-    active:
-      - production
+  config:
+    activate:
+      on-profile: production
 
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
+
+# Configuration for the production server (Good Gartic)
+discord:
+  guild-id: 683633975838769192
+  art-channel-id: 0
+  repost-channel-id: 0
+  repost-interval: 0
