@@ -5,4 +5,11 @@ import org.springframework.boot.context.properties.ConstructorBinding
 
 @ConstructorBinding
 @ConfigurationProperties(prefix = "discord")
-data class DiscordConfiguration(val token: String)
+data class DiscordConfiguration(
+    val token: String,
+    val guildId: Long,
+    val artChannelId: Long,
+    val repostChannelId: Long,
+    val repostInterval: Long,
+    val developerId: Long
+)
