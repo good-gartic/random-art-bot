@@ -4,9 +4,10 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
 @Component
-class DiscordTasks {
+class PostRandomGarticArtTask {
+
     @Scheduled(fixedRateString = "#{\${discord.repost-interval} * 1000}")
-    fun postRandomGarticArt() {
+    fun run() {
         println("Posting random art...")
     }
 }
