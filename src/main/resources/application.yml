@@ -3,6 +3,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/art
     username: art
     password: art
+
+discord:
+  token: ${DISCORD_TOKEN}
 ---
 spring:
   profiles:

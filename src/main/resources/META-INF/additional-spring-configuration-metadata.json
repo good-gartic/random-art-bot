@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "discord.token",
+      "type": "java.lang.String",
+      "description": "Discord token used for the gateway authentication."
+    }
+  ]
+}
