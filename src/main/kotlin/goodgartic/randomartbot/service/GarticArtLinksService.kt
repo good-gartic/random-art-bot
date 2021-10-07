@@ -31,15 +31,18 @@ class GarticArtLinksService(
         val link = getRandomGarticArtLink() ?: return reportEmptyDatabase()
         val message = link.messageId?.let { fetchMessageById(it) }
 
-        // TODO: Edit the sent embed
+        // Create the message embed
         val embed = createLinkEmbed(link, message)
         val action = repostChannel.sendMessageEmbeds(embed)
 
-        message?.let {
-            action.setActionRow(Button.link(it.jumpUrl, "Jump to the original message"))
-        }
+        // Add jump to the original message button component
+        message?.let { action.setActionRow(Button.link(it.jumpUrl, "Jump to the original message")) }
 
+        // Send the embed
         action.queue()
+
+        // And finally delete sent link from the database to prevent duplicates
+        // repository.delete(link) // TODO: Uncomment this before deployment
     }
 
     private fun getRandomGarticArtLink(): GarticArtLink? {
@@ -68,7 +71,6 @@ class GarticArtLinksService(
             builder
                 .setAuthor(message.author.name, null, message.author.avatarUrl)
                 .setFooter("Posted at ${message.timeCreated}")
-                .addField("Message link", it.jumpUrl, false)
         }
 
         return builder.build()
