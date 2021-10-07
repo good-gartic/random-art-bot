@@ -16,7 +16,7 @@ data class GarticArtLink(
     @Column(name = "image_url", unique = true, nullable = false)
     val image: String,
 
-    @Column(name = "message_id", unique = true, nullable = false)
+    @Column(name = "message_id", unique = true, nullable = true)
     val messageId: Long? = null,
 
     @Column(name = "is_approved", nullable = false)
