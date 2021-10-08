@@ -52,7 +52,7 @@ class GarticArtLinksService(
 
         // The returned page will contain exactly 1 element or be empty.
         // Empty page indicates, that the database contains no more links
-        return repository.findAll(pageable).firstOrNull()
+        return repository.findAllByApprovedIsTrue(pageable).firstOrNull()
     }
 
     private fun fetchMessageById(id: Long): Message? {
