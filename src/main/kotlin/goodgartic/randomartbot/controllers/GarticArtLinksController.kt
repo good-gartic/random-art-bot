@@ -29,6 +29,6 @@ class GarticArtLinksController(
         val json = String(file.bytes)
         val items = importService.processJsonExport(json)
 
-        return ResponseEntity.ok("message" to "Imported $items art links")
+        return ResponseEntity.ok(mapOf("message" to "Imported $items art links"))
     }
 }
