@@ -10,11 +10,13 @@ class ImportService(private val repository: GarticArtLinksRepository) {
 
     data class RawGarticArt(val image: String, val message: Long?)
 
-    fun processJsonBatch(json: String) {
+    fun processJsonExport(json: String): Int {
         val entries = extractGarticArtProperties(json)
         val entities = entries.map { GarticArtLink(image = it.image, messageId = it.message, approved = false) }
 
         repository.saveAll(entities)
+
+        return entries.size
     }
 
     private fun extractGarticArtProperties(json: String): List<RawGarticArt> {
