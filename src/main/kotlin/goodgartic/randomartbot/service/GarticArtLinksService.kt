@@ -2,6 +2,7 @@ package goodgartic.randomartbot.service
 
 import goodgartic.randomartbot.configuration.DiscordConfiguration
 import goodgartic.randomartbot.entity.GarticArtLink
+import goodgartic.randomartbot.exceptions.EntityNotFoundException
 import goodgartic.randomartbot.repositories.GarticArtLinksRepository
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.Guild
@@ -12,8 +13,10 @@ import net.dv8tion.jda.api.interactions.components.Button
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.Instant
+import java.util.*
 import kotlin.random.Random
 import kotlin.math.max
 
@@ -52,6 +55,16 @@ class GarticArtLinksService(
         val sort = Sort.by(Sort.Order.asc("approved")) // Put the not-approved entries first
 
         return repository.findAll(PageRequest.of(page, itemsPerPage, sort))
+    }
+
+    fun approve(id: UUID): GarticArtLink {
+        val item = repository.findByIdOrNull(id) ?: throw EntityNotFoundException()
+        return repository.save(item.apply { approved = true })
+    }
+
+    fun delete(id: UUID): GarticArtLink {
+        val item = repository.findByIdOrNull(id) ?: throw EntityNotFoundException()
+        return item.also { repository.delete(it) }
     }
 
     private fun getRandomGarticArtLink(): GarticArtLink? {

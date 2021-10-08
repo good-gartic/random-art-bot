@@ -8,6 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.util.*
 
 @RestController
 @RequestMapping("/api/links")
@@ -47,4 +48,10 @@ class GarticArtLinksController(
                 )
         }
     }
+
+    @PostMapping("/approve/{id}")
+    fun approve(@PathVariable id: UUID): ResponseEntity<*> = ResponseEntity.ok(service.approve(id))
+
+    @PostMapping("/delete/{id}")
+    fun delete(@PathVariable id: UUID): ResponseEntity<*> = ResponseEntity.ok(service.delete(id))
 }
