@@ -21,8 +21,18 @@ class ImportService(private val repository: GarticArtLinksRepository) {
         val reader = ObjectMapper()
         val source = reader.readTree(json) ?: throw IllegalArgumentException("Cannot parse the JSON tree")
 
-        TODO("Implement this")
+        return source.get("messages").iterator()
+            .asSequence()
+            .map {
+                val id = it.get("id")?.asLong()
+                val image = it.get("attachments")?.get(0)?.get("url")?.asText()
+                    ?: throw IllegalStateException("There is no image attached for message ID = $id"),
 
-        return emptyList()
+                RawGarticArt(
+                    image = image,
+                    message = id
+                )
+            }
+            .toList()
     }
 }
