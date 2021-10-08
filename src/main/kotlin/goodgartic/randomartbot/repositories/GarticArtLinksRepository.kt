@@ -13,4 +13,8 @@ interface GarticArtLinksRepository : CrudRepository<GarticArtLink, UUID>, Paging
 
     fun findAllByApprovedIsTrue(pageable: Pageable): Page<GarticArtLink>
 
+    fun findAllByApprovedIsFalse(pageable: Pageable): Page<GarticArtLink>
+
+    fun findAllByApprovedIsFalse(): List<GarticArtLink>
+
 }

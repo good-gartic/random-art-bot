@@ -49,6 +49,9 @@ class GarticArtLinksController(
         }
     }
 
+    @PostMapping("/approve-all")
+    fun approveAll(): ResponseEntity<*> = ResponseEntity.ok(service.approveAll())
+
     @PostMapping("/approve/{id}")
     fun approve(@PathVariable id: UUID): ResponseEntity<*> = ResponseEntity.ok(service.approve(id))
 

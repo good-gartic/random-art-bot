@@ -28,5 +28,29 @@ export default {
             .then(response => response);
 
         return response;
+    },
+    async approve(id) {
+        const response = await fetch(api + `/api/links/approve/${id}`, {
+            method: "post",
+            credentials: "include"
+        });
+
+        return response.ok;
+    },
+    async delete(id) {
+        const response = await fetch(api + `/api/links/delete/${id}`, {
+            method: "post",
+            credentials: "include"
+        });
+
+        return response.ok;
+    },
+    async approveAll() {
+        const response = await fetch(api + "/api/links/approve-all", {
+            method: "post",
+            credentials: "include"
+        });
+
+        return response.ok;
     }
 }

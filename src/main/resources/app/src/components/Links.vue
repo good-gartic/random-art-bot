@@ -9,6 +9,8 @@
         <div class="btn disabled">Page {{ page + 1 }}</div>
         <div class="btn" @click="reloadPage()">Reload</div>
         <button class="btn" @click="nextPage()">&raquo;</button>
+
+        <button class="ml-20 btn btn-primary" @click="approveAll()">Approve all</button>
       </div>
       <div class="col-sm-12 col-md-4 col-lg-3" v-for="(item, i) in images" :key="i">
         <div class="card p-0">
@@ -20,7 +22,7 @@
               </div>
               <button class="ml-5 btn btn-danger" @click="this.delete(item.id)">Delete</button>
             </div>
-            <div>
+            <div v-else>
               <div class="pb-10">
                 <small class="text-danger">Awaiting approval</small>
               </div>
@@ -65,11 +67,15 @@ export default {
       this.loading = false;
     },
     async approve(id) {
-      console.log(id);
+      await api.approve(id);
       await this.reloadPage();
     },
     async delete(id) {
-      console.log(id);
+      await api.delete(id);
+      await this.reloadPage();
+    },
+    async approveAll() {
+      await api.approveAll();
       await this.reloadPage();
     }
   }

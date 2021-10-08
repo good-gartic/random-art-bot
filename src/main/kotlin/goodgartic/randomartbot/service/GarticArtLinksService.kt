@@ -57,6 +57,18 @@ class GarticArtLinksService(
         return repository.findAll(PageRequest.of(page, itemsPerPage, sort))
     }
 
+    fun approveAll(): Int {
+        val entities = repository.findAllByApprovedIsFalse()
+        val updated = entities.map {
+            it.approved = true
+            it
+        }
+
+        repository.saveAll(updated)
+
+        return updated.size
+    }
+
     fun approve(id: UUID): GarticArtLink {
         val item = repository.findByIdOrNull(id) ?: throw EntityNotFoundException()
         return repository.save(item.apply { approved = true })
