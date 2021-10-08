@@ -26,9 +26,25 @@ class GarticArtLinksController(
             return ResponseEntity.badRequest().build<Any>()
         }
 
-        val json = String(file.bytes)
-        val items = importService.processJsonExport(json)
+        return try {
+            val json = String(file.bytes)
+            val items = importService.processJsonExport(json)
 
-        return ResponseEntity.ok(mapOf("message" to "Imported $items art links"))
+            ResponseEntity.ok(
+                mapOf(
+                    "success" to true,
+                    "message" to "Imported $items art links"
+                )
+            )
+        }
+        catch (exception: Exception) {
+            ResponseEntity.unprocessableEntity()
+                .body(
+                    mapOf(
+                        "success" to false,
+                        "message" to exception.message
+                    )
+                )
+        }
     }
 }
