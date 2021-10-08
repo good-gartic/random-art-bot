@@ -2,14 +2,16 @@
   <div>
     <h1>Gartic art links management</h1>
     <Import/>
+    <Links/>
   </div>
 </template>
 
 <script>
 
 import Import from "@/components/Import";
+import Links from "@/components/Links";
 export default {
   name: 'App',
-  components: {Import},
+  components: {Links, Import},
 }
 </script>

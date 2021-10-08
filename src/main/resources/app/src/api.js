@@ -18,5 +18,15 @@ export default {
             error: !response.success,
             message: response.message
         }
+    },
+    async fetchLinksPage(page) {
+        const response = await fetch(api + `/api/links?page=${page}`, {
+            method: "get",
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(response => response);
+
+        return response;
     }
 }
