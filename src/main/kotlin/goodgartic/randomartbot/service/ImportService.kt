@@ -26,7 +26,7 @@ class ImportService(private val repository: GarticArtLinksRepository) {
             .map {
                 val id = it.get("id")?.asLong()
                 val image = it.get("attachments")?.get(0)?.get("url")?.asText()
-                    ?: throw IllegalStateException("There is no image attached for message ID = $id"),
+                    ?: throw IllegalStateException("There is no image attached for message ID = $id")
 
                 RawGarticArt(
                     image = image,
