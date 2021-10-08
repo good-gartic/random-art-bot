@@ -25,14 +25,14 @@ class ImportService(private val repository: GarticArtLinksRepository) {
             .asSequence()
             .map {
                 val id = it.get("id")?.asLong()
-                val image = it.get("attachments")?.get(0)?.get("url")?.asText()
-                    ?: throw IllegalStateException("There is no image attached for message ID = $id")
+                val image = it.get("attachments")?.get(0)?.get("url")?.asText() ?: return@map null
 
                 RawGarticArt(
                     image = image,
                     message = id
                 )
             }
+            .filterNotNull()
             .toList()
     }
 }
