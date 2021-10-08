@@ -9,7 +9,9 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.TextChannel
 import net.dv8tion.jda.api.interactions.components.Button
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.time.Instant
 import kotlin.random.Random
@@ -43,6 +45,13 @@ class GarticArtLinksService(
 
         // And finally delete sent link from the database to prevent duplicates
         // repository.delete(link) // TODO: Uncomment this before deployment
+    }
+
+    fun linksPage(page: Int): Page<GarticArtLink> {
+        val itemsPerPage = 100
+        val sort = Sort.by(Sort.Order.asc("approved")) // Put the not-approved entries first
+
+        return repository.findAll(PageRequest.of(page, itemsPerPage, sort))
     }
 
     private fun getRandomGarticArtLink(): GarticArtLink? {
