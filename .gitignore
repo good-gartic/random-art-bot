@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignore compiled frontend app
+/src/main/resources/static
+/src/main/resources/templates
