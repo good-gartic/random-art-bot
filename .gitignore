@@ -39,3 +39,5 @@ out/
 # Ignore compiled frontend app
 /src/main/resources/static/*
 /src/main/resources/templates/*
+
+.env

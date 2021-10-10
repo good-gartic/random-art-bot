@@ -47,7 +47,7 @@ class GarticArtLinksService(
         action.queue()
 
         // And finally delete sent link from the database to prevent duplicates
-        // repository.delete(link) // TODO: Uncomment this before deployment
+         repository.delete(link)
     }
 
     fun linksPage(page: Int): Page<GarticArtLink> {

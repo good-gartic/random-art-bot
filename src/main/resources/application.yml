@@ -15,7 +15,7 @@ discord:
   guild-id: 691227762102501436
   art-channel-id: 895736096548323328 # The channel from which the images are pulled from by the server owner
   repost-channel-id: 895736123878424646 # The channel to which the pictures are posted periodically
-  repost-interval: 1000 # Number of seconds between each picture reposted
+  repost-interval: 20 # Number of minutes between each picture reposted
   developer-id: 238728915647070209 # So that the bot can ping me if shit gets wrong
 
 administration:
@@ -40,4 +40,4 @@ discord:
   guild-id: 683633975838769192
   art-channel-id: 683638355895779450 #gartic-art
   repost-channel-id: 683633975842963456 #chat
-  repost-interval: 24 * 60 * 60 # 24 hours for now
+  repost-interval: 1440 # 24 hours
