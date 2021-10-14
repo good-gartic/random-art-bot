@@ -27,9 +27,9 @@ spring:
       on-profile: production
 
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://database:5432/art
+    name: art
+    password: art
 
   jpa:
     show-sql: false
@@ -37,7 +37,7 @@ spring:
 # Configuration for the production server (Good Gartic)
 # TODO: Make this environmental-variables dependent so it can be changed on heroku without changing the code
 discord:
-  guild-id: 683633975838769192
-  art-channel-id: 683638355895779450 #gartic-art
-  repost-channel-id: 683633975842963456 #chat
-  repost-interval: 1440 # 24 hours
+  guild-id: ${GUILD_ID}
+  art-channel-id: ${ART_CHANNEL_ID}
+  repost-channel-id: ${REPOST_CHANNEL_ID}
+  repost-interval: ${REPOST_INTERVAL}
