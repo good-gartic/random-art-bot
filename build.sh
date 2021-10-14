@@ -16,3 +16,10 @@ cp -R ./dist/* ../static
 
 # Copy the index.html file to templates, as it will be rendered by controller
 mv ../static/index.html ../templates/index.html
+
+# Build and run the JVM application
+cd ../../../..
+
+# TODO: Load the environmental variables?
+
+./gradlew bootRun
