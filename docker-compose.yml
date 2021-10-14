@@ -12,10 +12,9 @@ services:
       - 8080:8080
     build: .
     environment:
-      DISCORD_TOKEN: $DISCORD_TOKEN # Loaded from the .env file
+      # Loaded from the .env file
+      DISCORD_TOKEN: $DISCORD_TOKEN
       ADMINISTRATION_PASSWORD: $ADMINISTRATION_PASSWORD
-
-      SPRING_PROFILES_ACTIVE: 'production'
 
       GUILD_ID: 683633975838769192 # ID of the managed guild
       ART_CHANNEL_ID: 683638355895779450 #gartic-art
