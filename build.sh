@@ -7,6 +7,10 @@ cd src/main/resources/app/
 npm install
 npm run build
 
+# Create the resource directories
+mkdir -p ../static
+mkdir -p ../templates
+
 # Clear the previously built resources
 rm -rf ../static/*
 rm -f ../templates/index.html
