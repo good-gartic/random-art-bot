@@ -18,3 +18,8 @@ discord:
   repost-channel-id: ${REPOST_CHANNEL_ID}
   repost-interval: ${REPOST_INTERVAL}
   developer-id: 238728915647070209 # So that the bot can ping me if shit gets wrong
+
+server:
+  tomcat:
+    max-swallow-size: -1
+    max-http-form-post-size: -1
