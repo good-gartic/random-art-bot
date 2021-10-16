@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Gartic art links management</h1>
+    <div class="container">
+      <h1>Gartic art links management</h1>
+    </div>
     <Import/>
     <Links/>
   </div>

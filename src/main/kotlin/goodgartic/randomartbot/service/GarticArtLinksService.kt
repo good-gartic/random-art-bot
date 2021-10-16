@@ -50,11 +50,14 @@ class GarticArtLinksService(
          repository.delete(link)
     }
 
-    fun linksPage(page: Int): Page<GarticArtLink> {
-        val itemsPerPage = 100
-        val sort = Sort.by(Sort.Order.asc("approved")) // Put the not-approved entries first
-
-        return repository.findAll(PageRequest.of(page, itemsPerPage, sort))
+    fun loadLinks(): List<GarticArtLink> {
+        // Put the not-approved entries first
+        return repository.findAll(
+                Sort.by(
+                        Sort.Order.asc("messageId"),
+                        Sort.Order.asc("image")
+                )
+        ).toList()
     }
 
     fun approveAll(): Int {

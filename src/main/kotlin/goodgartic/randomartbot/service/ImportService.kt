@@ -11,12 +11,17 @@ class ImportService(private val repository: GarticArtLinksRepository) {
     data class RawGarticArt(val image: String, val message: Long?)
 
     fun processJsonExport(json: String): Int {
+        // Duplicated links are filtered out, so there is a need to load all links before importing a new batch
+        val links = repository.findAll().map { it.image }.toSet()
+
         val entries = extractGarticArtProperties(json)
-        val entities = entries.map { GarticArtLink(image = it.image, messageId = it.message, approved = false) }
+        val entities = entries
+                .filter { it.image !in links }
+                .map { GarticArtLink(image = it.image, messageId = it.message, approved = false) }
 
         repository.saveAll(entities)
 
-        return entries.size
+        return entities.size
     }
 
     private fun extractGarticArtProperties(json: String): List<RawGarticArt> {

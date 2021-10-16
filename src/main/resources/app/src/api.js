@@ -19,8 +19,8 @@ export default {
             message: response.message
         }
     },
-    async fetchLinksPage(page) {
-        const response = await fetch(api + `/api/links?page=${page}`, {
+    async fetchLinksPage() {
+        const response = await fetch(api + `/api/links`, {
             method: "get",
             credentials: "include"
         })
