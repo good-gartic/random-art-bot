@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 @Component
 class PostRandomGarticArtTask(private val service: GarticArtLinksService) {
 
-    @Scheduled(fixedRateString = "#{\${discord.repost-interval} * 1000}")
+    @Scheduled(fixedRateString = "#{\${discord.repost-interval} * 1000 * 60}")
     fun run() {
         service.repostRandomGarticArtLink()
     }
