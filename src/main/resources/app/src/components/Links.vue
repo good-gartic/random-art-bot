@@ -9,9 +9,14 @@
         <div class="btn" @click="reloadPage()">Reload</div>
         <button class="ml-20 btn btn-primary" @click="approveAll()">Approve all</button>
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-3" v-for="(item, i) in images" :key="i">
+      <div id="top"></div>
+      <div class="col-sm-12" v-if="images.length === 0">
+        <h2 class="text-muted">There are no images imported yet</h2>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-3" v-else v-for="(item, i) in images" :key="i">
         <div class="card p-0">
-          <div class="h-250" :style="`background: url('${item.image}'); background-size: contain; background-repeat: no-repeat`"></div>
+          <div class="h-250"
+               :style="`background: url('${item.image}'); background-size: contain; background-repeat: no-repeat`"></div>
           <div class="p-10">
             <div v-if="item.approved">
               <div class="pb-10">
@@ -28,6 +33,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-sm-12">
+        <button class="btn" @click="nextPage()">&raquo; Page {{ page + 2 }}</button>
       </div>
     </div>
   </div>

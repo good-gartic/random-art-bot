@@ -22,15 +22,15 @@ import kotlin.math.max
 
 @Service
 class GarticArtLinksService(
-    private val guild: Guild,
-    private val configuration: DiscordConfiguration,
-    private val repository: GarticArtLinksRepository
+        private val guild: Guild,
+        private val configuration: DiscordConfiguration,
+        private val repository: GarticArtLinksRepository
 ) {
     private val artChannel: TextChannel = guild.getTextChannelById(configuration.artChannelId)
-        ?: throw IllegalStateException("Cannot find the configured art channel (${configuration.artChannelId})")
+            ?: throw IllegalStateException("Cannot find the configured art channel (${configuration.artChannelId})")
 
     private val repostChannel: TextChannel = guild.getTextChannelById(configuration.repostChannelId)
-        ?: throw IllegalStateException("Cannot find the configured repost channel (${configuration.repostChannelId})")
+            ?: throw IllegalStateException("Cannot find the configured repost channel (${configuration.repostChannelId})")
 
     fun repostRandomGarticArtLink() {
         val link = getRandomGarticArtLink() ?: return reportEmptyDatabase()
@@ -47,17 +47,19 @@ class GarticArtLinksService(
         action.queue()
 
         // And finally delete sent link from the database to prevent duplicates
-         repository.delete(link)
+        repository.delete(link)
     }
 
-    fun loadLinks(): List<GarticArtLink> {
+    fun loadLinks(page: Int): Page<GarticArtLink> {
+        val itemsPerPage = 32
+        val sort = Sort.by(
+                Sort.Order.asc("messageId"),
+                Sort.Order.asc("image"),
+                Sort.Order.asc("approved")
+        )
+
         // Put the not-approved entries first
-        return repository.findAll(
-                Sort.by(
-                        Sort.Order.asc("messageId"),
-                        Sort.Order.asc("image")
-                )
-        ).toList()
+        return repository.findAll(PageRequest.of(page, itemsPerPage, sort))
     }
 
     fun approveAll(): Int {
@@ -98,17 +100,17 @@ class GarticArtLinksService(
 
     private fun createLinkEmbed(link: GarticArtLink, message: Message?): MessageEmbed {
         val builder = EmbedBuilder()
-            .setTitle("Random gartic art")
-            .setImage(link.image)
-            .setColor(0x0a5efb)
-            .setTimestamp(Instant.now())
+                .setTitle("Random gartic art")
+                .setImage(link.image)
+                .setColor(0x0a5efb)
+                .setTimestamp(Instant.now())
 
         // TODO: Maybe add other interesting information?
         message?.let {
             builder
-                .setDescription(message.contentRaw)
-                .setAuthor(message.author.name, null, message.author.avatarUrl)
-                .setFooter("Posted at ${message.timeCreated}")
+                    .setDescription(message.contentRaw)
+                    .setAuthor(message.author.name, null, message.author.avatarUrl)
+                    .setFooter("Posted at ${message.timeCreated}")
         }
 
         return builder.build()
@@ -116,15 +118,15 @@ class GarticArtLinksService(
 
     private fun reportEmptyDatabase() {
         val embed = EmbedBuilder()
-            .setTitle("Oh no!")
-            .setDescription("The gartic art links database returned no results!\nThis is probably a bug.")
-            .setColor(0xed4245)
-            .setTimestamp(Instant.now())
-            .build()
+                .setTitle("Oh no!")
+                .setDescription("The gartic art links database returned no results!\nThis is probably a bug.")
+                .setColor(0xed4245)
+                .setTimestamp(Instant.now())
+                .build()
 
         repostChannel
-            .sendMessage("Hey, ho <@${configuration.developerId}>!")
-            .setEmbeds(embed)
-            .queue()
+                .sendMessage("Hey, ho <@${configuration.developerId}>!")
+                .setEmbeds(embed)
+                .queue()
     }
 }

@@ -19,15 +19,13 @@ export default {
             message: response.message
         }
     },
-    async fetchLinksPage() {
-        const response = await fetch(api + `/api/links`, {
+    async fetchLinksPage(page) {
+        return await fetch(api + `/api/links?page=${page}`, {
             method: "get",
             credentials: "include"
         })
-            .then(response => response.json())
-            .then(response => response);
-
-        return response;
+        .then(response => response.json())
+        .then(response => response);
     },
     async approve(id) {
         const response = await fetch(api + `/api/links/approve/${id}`, {

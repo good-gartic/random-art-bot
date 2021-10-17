@@ -17,8 +17,8 @@ class GarticArtLinksController(
     private val importService: ImportService
 ) {
     @GetMapping
-    fun page(): ResponseEntity<List<GarticArtLink>> =
-        ResponseEntity.ok(service.loadLinks())
+    fun page(@RequestParam page: Int? = null): ResponseEntity<Page<GarticArtLink>> =
+        ResponseEntity.ok(service.loadLinks(page ?: 0))
 
     @PostMapping("/import")
     fun import(@RequestParam file: MultipartFile): ResponseEntity<*> {
