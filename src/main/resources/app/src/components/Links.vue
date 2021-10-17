@@ -5,7 +5,8 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button class="btn" @click="loadEntries()">Reload</button>
+        <button class="btn" :disabled="page === 0" @click="prevPage()">&laquo; Page {{ page }}</button>
+        <div class="btn" @click="reloadPage()">Reload</div>
         <button class="ml-20 btn btn-primary" @click="approveAll()">Approve all</button>
       </div>
       <div class="col-sm-12 col-md-4 col-lg-3" v-for="(item, i) in images" :key="i">
@@ -38,30 +39,42 @@ import api from "@/api"
 export default {
   name: "Links",
   data: () => ({
+    page: 0,
     images: [],
     loading: false
   }),
   async mounted() {
-    await this.loadEntries()
+    await this.reloadPage()
   },
   methods: {
-    async loadEntries() {
+    async prevPage() {
+      this.page--;
+      await this.reloadPage();
+    },
+    async nextPage() {
+      this.page++;
+      await this.reloadPage();
+      await document.getElementById("top").scrollIntoView({ behavior: "smooth" });
+    },
+    async reloadPage() {
       this.loading = true;
 
-      this.images = await api.fetchLinksPage();
+      const response = await api.fetchLinksPage(this.page)
+
+      this.images = response.content;
       this.loading = false;
     },
     async approve(id) {
       await api.approve(id);
-      await this.loadEntries();
+      await this.reloadPage();
     },
     async delete(id) {
       await api.delete(id);
-      await this.loadEntries();
+      await this.reloadPage();
     },
     async approveAll() {
       await api.approveAll();
-      await this.loadEntries();
+      await this.reloadPage();
     }
   }
 }
