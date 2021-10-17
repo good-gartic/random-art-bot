@@ -86,7 +86,7 @@ class GarticArtLinksService(
 
     private fun getRandomGarticArtLink(): GarticArtLink? {
         // Select a random row from 0 to N, where N is the number of all links in the database
-        val selected = Random.nextLong(max(repository.count(), 1)).toInt()
+        val selected = Random.nextLong(max(repository.countByApprovedIsTrue(), 1)).toInt()
         val pageable = PageRequest.of(selected, 1)
 
         // The returned page will contain exactly 1 element or be empty.
@@ -95,7 +95,8 @@ class GarticArtLinksService(
     }
 
     private fun fetchMessageById(id: Long): Message? {
-        return artChannel.retrieveMessageById(id).complete()
+        return try { artChannel.retrieveMessageById(id).complete() }
+               catch (exception: Throwable) { null }
     }
 
     private fun createLinkEmbed(link: GarticArtLink, message: Message?): MessageEmbed {

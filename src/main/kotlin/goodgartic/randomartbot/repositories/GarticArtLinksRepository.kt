@@ -11,6 +11,8 @@ import java.util.*
 @Repository
 interface GarticArtLinksRepository : CrudRepository<GarticArtLink, UUID>, PagingAndSortingRepository<GarticArtLink, UUID> {
 
+    fun countByApprovedIsTrue(): Long
+
     fun findAllByApprovedIsTrue(pageable: Pageable): Page<GarticArtLink>
 
     fun findAllByApprovedIsFalse(pageable: Pageable): Page<GarticArtLink>
