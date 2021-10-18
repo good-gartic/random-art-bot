@@ -111,7 +111,8 @@ class GarticArtLinksService(
             builder
                     .setDescription(message.contentRaw)
                     .setAuthor(message.author.name, null, message.author.avatarUrl)
-                    .setFooter("Posted at ${message.timeCreated}")
+                    .setFooter("Original message posted at")
+                    .setTimestamp(message.timeEdited ?: message.timeCreated)
         }
 
         return builder.build()
