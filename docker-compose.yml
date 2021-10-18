@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: art
       POSTGRES_PASSWORD: art
       POSTGRES_DATABASE: art
+    volumes:
+      - data:/var/lib/postgresql/data
   app:
     ports:
       - 8080:8080
@@ -22,3 +24,8 @@ services:
       REPOST_INTERVAL: 1440 # 24 hours (the value is in minutes)
     depends_on:
       - database
+
+volumes:
+  data:
+    external:
+      name: random-art-bot-data
